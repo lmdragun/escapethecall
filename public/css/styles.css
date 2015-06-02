@@ -1,0 +1,159 @@
+
+	* {
+		padding: 0;
+		margin: 0;
+	}
+	body {
+		min-width: 100%;
+		background-color: #000;
+	}
+#start {
+	min-width: 100%;
+	min-height: 100%;
+	text-align: center;
+	float: center;
+	font-size: 30px;
+	color: #fff;
+	background-color: rgba(0,0,0,.8);
+	z-index: 1000;
+	position: absolute;
+}
+	#start p {
+		width: 50%;
+		margin: 20px auto;
+	}
+	.start {
+		padding: 5px;
+	}
+
+	#upper {
+		width: 100%;
+		height: 300px;
+	}
+	.mom {
+		width: 40%;
+		height: 100%;
+		float: right;
+	}
+
+	.mom-anger {
+		width: 40px;
+		height: 200px;
+		border: 1px solid red;
+		float: left;
+		margin: 5% 0 0 5%;
+	}
+
+	.mom-anger div {
+		width: 100%;
+		height: 2px;
+		background-color: red;
+	}
+
+#bubble {
+	position: relative;
+	width: 80%;
+	min-height: 40%;
+	padding: 0px;
+	background: #FFFFFF;
+	-webkit-border-radius: 54px;
+	-moz-border-radius: 54px;
+	border-radius: 54px;
+	border: #FF7F7F solid 1px;
+	margin: 10px auto;
+}
+
+#bubble:after {
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 18px 24px 18px 0;
+	border-color: transparent #FFFFFF;
+	display: block;
+	width: 0;
+	z-index: 1;
+	margin-top: -18px;
+	left: -24px;
+	top: 50%;
+}
+
+#bubble:before {
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 18px 24px 18px 0;
+	border-color: transparent #FF7F7F;
+	display: block;
+	width: 0;
+	z-index: 0;
+	margin-top: -18px;
+	left: -25px;
+	top: 50%;
+}
+
+#bubble p {
+	text-align: center;
+	padding: 10px;
+	font-size: 16px;
+}
+
+/* 	.word-bubble {
+	color: #000;
+	background-color: #fff;
+	border: 1px solid red;
+	margin: 20px auto;
+	width: 60%;
+	height: 70%;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+}
+.arrow {
+width: 0;
+height: 0;
+border-top: 30px solid transparent;
+border-bottom: 30px solid transparent;
+border-right: 25px solid red;
+margin: 10% 0 0 10%;
+position: relative;
+} */
+	.mom-phrase {
+		float: right;
+		width: 50%;
+		height: 100%;
+	}
+	#status {
+		width: 100%;
+		height: 100px;
+		border: 1px solid blue;
+		color: #fff;
+	}
+	.current-status {
+		float: right;
+	}
+	.current-status p {
+		font-size: 30px;
+		padding: 20px;
+	}
+	#choices {
+		width: 100%;
+		height: 400px;
+		border: 1px solid green;
+		color: #fff;
+		display: inline-block;
+		padding: 5px;
+		margin: 0 auto;
+	}
+
+	#choices h1 {
+		font-size: 20px;
+		border: 1px solid green;
+		width: 30%;
+		display: inline-block;
+		padding: 5px;
+		margin: 4px;
+		text-align: center;
+		-webkit-border-radius: 54px;
+		-moz-border-radius: 54px;
+		border-radius: 54px;
+	}

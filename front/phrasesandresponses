@@ -1,0 +1,18 @@
+Phrases:
+	Level: 1
+		Number: 1
+			Phrase: "Hi, honey!",
+			type: "greeting",
+			question: false
+		Number: 2
+			Phrase: "What did you do today?",
+				type: "early",
+				question: true
+		Number: 3
+			Phrase: "How are you doing?",
+				type: "early",
+				question: true
+		Number: 4
+			Phrase: "I had SUCH a busy day!"
+				type: "early",
+				question: false

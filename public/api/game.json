@@ -1,0 +1,97 @@
+{
+	"levels": [
+			{
+
+			"phrases": [
+				{
+					"phrase": "How are you, honey?",
+					"question": true,
+					"type": "early",
+					"number": 6
+				},
+				{
+					"phrase": "I've missed you.",
+					"question": false,
+					"type": "early",
+					"number": 10
+				},
+				{
+					"phrase": "What did you do today?",
+					"question": true,
+					"type": "early",
+					"number": 5
+				},
+				{
+					"phrase": "I've had SUCH a busy day!",
+					"question": false,
+					"type": "mid",
+					"number": 4
+				},
+				{
+				"phrase": "I went to the store today and there was such a sweet girl at the cash register, I told her all about what you're doing with your life and did you know she's going to college to be a doctor? Why couldn't you have been a doctor?",
+				"question": false,
+				"type": "mid",
+				"number": 2
+				},
+				{
+				"phrase": "I found the best shoes the other day, I've already ordered two more pairs in different colors, they are so cute. And comfortable. I've only worn them for one day but I feel like I could wear them all week. I wanted to get more shoes from that brand, but you know how shoes are nowadays, there's no quality control or standard sizing.",
+				"question": false,
+				"type": "mid",
+				"number": 5
+				}
+		],
+		"choices": [
+			{
+				"choice": "Uhuh.",
+				"answer": true,
+				"type": "always",
+				"number": 2
+			},
+			{
+				"choice": "Right.",
+				"answer": false,
+				"type": "always",
+				"number": 3
+			},
+			{
+				"choice": "Yep.",
+				"answer": true,
+				"type": "always",
+				"number": 3
+			},
+			{
+				"choice": "I love you, mom.",
+				"answer": false,
+				"type": "always",
+				"number": 20
+			},
+			{
+				"choice": "Nope.",
+				"answer": true,
+				"type": "always",
+				"number": 3
+			},
+			{
+				"choice": "How was your day?",
+				"answer": false,
+				"type": "early",
+				"number": 8
+			}
+		],
+		"statuses": [
+			{
+				"status": "You just got home from work, all you want to do is eat and sleep.",
+				"follow-up": "You didn't have time to do anything else, now you'll have to wake up early!",
+				"time": 360000
+			},
+			{
+				"status": "You need to cook dinner.",
+				"follow-up": "You tried to cook dinner while talking to your mom and burned yourself!",
+				"time": 360000
+			}
+		]
+
+		}
+	]
+
+}
