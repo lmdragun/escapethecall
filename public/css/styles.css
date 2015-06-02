@@ -43,13 +43,16 @@
 		border: 1px solid red;
 		float: left;
 		margin: 5% 0 0 5%;
+		display: block;
+		overflow: hidden;
 	}
 
-	.mom-anger div {
+	#mom-anger div {
 		width: 100%;
 		height: 2px;
 		background-color: red;
 	}
+
 
 #bubble {
 	position: relative;

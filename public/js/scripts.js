@@ -19,33 +19,8 @@ var gameTime = 0;
 // 	placeChoices(choices);
 // }
 //
-// function drawPlayerPoints(){
-// 	$("#player-points").empty();
-// 	$("#player-points").append("<div>" + playerScore + "</div>");
-// }
 //
-// function drawMomAnger(){
-// 	$("#mom-anger").append("<div class=\"test\"></div><div></div><div></div>");
-// 	for(var i = 0; i < momAnger.count; i++){
-// 		$("#mom-anger").append("<div>" + "" + "</div>");
-// 	}
-// }
 //
-// function calcScore(playerChoice){
-// 	console.log("In calcScore, currentMomPhrase points: " + currentMomPhrase[0].points + ", playerChoice amount: " + playerChoice);
-// 	calculation = playerChoice - currentMomPhrase[0].points;
-// 	if(calculation >= 0){
-// 		playerScore += calculation;
-// 	}
-// 	else if(calculation < 0){
-// 		momAnger -= calculation;
-// 	}
-// 	drawPlayerPoints();
-// 	drawMomAnger();
-// 	console.log("playerScore in calcScore: " + playerScore);
-// 	console.log("momAnger in calcScore: " + momAnger);
-// 	checkGameStatus();
-// }
 //
 // function checkGameStatus(){
 // 	console.log("In checkGameStatus");
@@ -136,7 +111,7 @@ function Game(){
 }
 
 Game.prototype = {
-	getMomAngerPoints: function(callback){
+	getMomAngerStatus: function(callback){
 		var momAngerStatus = {};
 		var img = document.createElement("IMG");
 		img.className = "mom";
@@ -182,32 +157,77 @@ Game.prototype = {
 		callback(randomChoices);
 		});
 	},
-	getPhrases: function(callback){
+	getPhrases: function(){
 		var neaterPhrases = []; //collection of phrases separated into objects
 		var randomPhrase = []; //one random phrase
-		$.getJSON("/api/game.json", function(data){
+		return $.getJSON("/api/game.json", function(data){
 			phrases.push(data.levels[0].phrases);
 			_.each(phrases[0], function(phrase){
 				neaterPhrases.push({
-					number: phrase.number,
+					points: phrase.number,
 					phrase: phrase.phrase
 				});
 			});
-		this.currentMomPhrase = _.sample(neaterPhrases, 1);
-		callback(this.currentMomPhrase);
-		});
+			this.currentMomPhrase = _.sample(neaterPhrases, 1);
+			console.dir(this);
+		}.bind(this));
 	},
-	calcScore: function(callback){
-		
+	calcScore: function(newPlayerPoints){
+		console.log("this.currentMomPhrase.points: " + this.currentMomPhrase[0].points);
+		var calculatedScore = newPlayerPoints - this.currentMomPhrase[0].points;
+		console.log("calculatedScore in calcScore: " + calculatedScore);
+		if(calculatedScore >= 0){
+			this.playerPoints += calculatedScore;
+		}
+		else{
+			this.momAngerPoints -= calculatedScore;
+		}
+		var points = {
+			momAngerPoints: this.momAngerPoints,
+			playerPoints: this.playerPoints
+		}
+		console.log("calcScore, momAngerPoints: " + this.momAngerPoints + ", playerPoints: " + this.playerPoints);
+		return points
+		// drawPoints(playerPoints, momAngerPoints)
+	},
+	checkGameStatus: function(){
+		console.log("In checkGameStatus");
+		if(this.gameTime < 5000 && this.momAngerPoints < 100 && this.playerPoints < 100){
+			updateGame();
+		}
+		else if(this.gameTime == 5000){
+			secondPlayerStatus();
+		}
+		else if(this.momAngerPoints == 100){
+			lostGame();
+		}
+		else if(this.playerPoints == 100){
+			wonLevel();
+		}
 	}
 }
 
 function GameView(model){
 	this.model = model;
-	this.listen();
-	this.model.getMomAngerPoints(this.drawMom);
+	var calcScore = {};
+	$(".start").on("click", function(){
+		$("#start").css("display", "none");
+	});
+	$("#choices").on("click", function(event){
+		console.log("playerScore in beginGame: " + this.model.playerPoints);
+		calcScore = this.model.calcScore(event.target.className);
+		this.drawPoints(calcScore);
+		this.model.checkGameStatus();
+	}.bind(this));
+
+	console.dir(calcScore);
+
+	this.model.getMomAngerStatus(this.drawMom);
 	this.model.getChoices(this.showChoices);
-	this.model.getPhrases(this.showPhrase);
+	this.model.getPhrases().done(function(){
+		this.showPhrase(this.model.currentMomPhrase);
+	}.bind(this));
+
 }
 
 GameView.prototype = {
@@ -218,6 +238,17 @@ GameView.prototype = {
 		img.alt = momAngerStatus.alt;
 		document.getElementById("upper").appendChild(img);
 	},
+	drawPoints: function(calcScore){
+		$("#player-points").empty();
+		$("#player-points").append("<div>" + calcScore.playerPoints + "</div>");
+		$("#mom-anger").empty();
+		console.log("playerPoints: " + calcScore.playerPoints);
+		console.log("momAngerPoints: " + calcScore.momAngerPoints);
+		for(var i = 0; i < calcScore.momAngerPoints; i++){
+			$("#mom-anger").append("<div>" + "" + "</div>");
+			console.log("mom points");
+		}
+	},
 	showChoices: function(choices){
 		for(var i = 0; i < choices.length; i++){
 			$("#choices").append("<h1 class=\"" + choices[i].id + "\">" + choices[i].choice + "</h1>");
@@ -226,13 +257,6 @@ GameView.prototype = {
 	showPhrase: function(phrase){
 		$("#bubble").empty();
 		$("#bubble").append("<p class=\"" + phrase[0].points + "\">" + phrase[0].phrase + "</p>");
-	},
-	listen: function(){
-		$("#choices").on("click", function(event){
-			console.log("playerScore in beginGame: " + this.model.playerPoints);
-			this.model.calcScore(event.target.className);
-			// calcScore(playerChoice);
-		}.bind(this) );
 	}
 
 }
