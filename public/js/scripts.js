@@ -17,65 +17,77 @@ var playerScore = 0;
 // var testChoices = ["Uhuh", "Right", "Yep", "You know it", "Love you, too, mom", "Mom, I've really gotta go...."];
 
 
-$.getJSON("/api/game.json", function(data){
-	console.log(data);
-	phrases.push(data.levels[0].phrases);
-	console.log(phrases);
-	choices.push(data.levels[0].choices);
-	console.log(choices);
-});
+// $.getJSON("/api/game.json", function(data){
+// 	console.log(data);
+// 	phrases.push(data.levels[0].phrases);
+// 	console.log(phrases);
+// 	choices.push(data.levels[0].choices);
+// 	console.log(choices);
+// });
 
 function drawMom(momAnger){
-	console.log("drawMom");
+	console.log("In drawMom");
 	var img = document.createElement("IMG");
 	img.className = "mom";
 	if(momAnger < 35){
 		img.src = "images/momstandin01.png";
 		img.alt = "Happy mom";
 		document.getElementById("upper").appendChild(img);
-		console.log("Happy Mom");
 	}
 	else if(momAnger < 70){
 		img.src = "images/momstandin02.png";
 		img.alt = "Annoyed mom";
 		document.getElementById("upper").appendChild(img);
-		console.log("Annoyed Mom");
 	}
 	else if(momAnger < 100){
 		img.src = "images/momstandin03.png";
 		img.alt = "Angry mom";
 		document.getElementById("upper").appendChild(img);
-		console.log("Angry Mom");
 	}
 	else if(momAnger == 100){
 		img.src = "images/momstandin04.png";
 		img.alt = "Furious mom";
 		document.getElementById("upper").appendChild(img);
-		console.log("Furious Mom");
 	}
 }
 
 function updateGame(){
-	console.log("updateGame");
+	console.log("In updateGame");
 	drawMom();
 	randomMomPhrase();
+	placeChoices(choices);
+}
+
+function drawPlayerPoints(){
+	$("#player-points").empty();
+	$("#player-points").append("<div>" + playerScore + "</div>");
+}
+
+function drawMomAnger(){
+	$("#mom-anger").append("<div class=\"test\"></div><div></div><div></div>");
+	for(var i = 0; i < momAnger.count; i++){
+		$("#mom-anger").append("<div>" + "" + "</div>");
+	}
 }
 
 function calcScore(playerChoice){
-	console.log("calcScore");
-	console.log("playerChoice: " + playerChoice);
-	calculation = playerChoice - momPoints;
+	console.log("In calcScore, currentMomPhrase points: " + currentMomPhrase[0].points + ", playerChoice amount: " + playerChoice);
+	calculation = playerChoice - currentMomPhrase[0].points;
 	if(calculation >= 0){
-		playerScore += playerChoice;
+		playerScore += calculation;
 	}
 	else if(calculation < 0){
-		momAnger += playerChoice;
+		momAnger -= calculation;
 	}
+	drawPlayerPoints();
+	drawMomAnger();
+	console.log("playerScore in calcScore: " + playerScore);
+	console.log("momAnger in calcScore: " + momAnger);
 	checkGameStatus();
 }
 
 function checkGameStatus(){
-	console.log("checkGameStatus");
+	console.log("In checkGameStatus");
 	if(gameTime < 5000 && momAnger < 100 && playerScore < 100){
 		updateGame();
 	}
@@ -91,7 +103,7 @@ function checkGameStatus(){
 }
 
 function randomMomPhrase(){
-	console.log("randomMomPhrase");
+	console.log("In randomMomPhrase");
 	var justPhrases = [];
 	var onlyPhrases = phrases[0];
 	_.each(onlyPhrases, function(phrase){
@@ -102,11 +114,9 @@ function randomMomPhrase(){
 		};
 		justPhrases.push(momPhrase);
 	});
-	var randomPhrase = _.sample(justPhrases, 1);
-	console.log("randomPhrase: " + randomPhrase[0]);
-	// currentMomPhrase = randomPhrase;
-	$("#bubble").append("<p class=\"" + randomPhrase[0].points + "\">" + randomPhrase[0].phrase + "</p>");
-	console.log("New Phrase");
+	currentMomPhrase = _.sample(justPhrases, 1);
+	$("#bubble").empty();
+	$("#bubble").append("<p class=\"" + currentMomPhrase[0].points + "\">" + currentMomPhrase[0].phrase + "</p>");
 }
 
 function placeChoices(choices){
@@ -120,19 +130,16 @@ function placeChoices(choices){
 			justChoices.push(answer);
 		});
 		var randomChoice = _.sample(justChoices, 3);
-		console.log(randomChoice);
+		$("#choices").empty();
 		for(var i = 0; i < 3; i++){
-			console.log(randomChoice[i].choice);
 			$("#choices").append("<h1 class=\"" + randomChoice[i].id + "\">" + randomChoice[i].choice + "</h1>");
+			currentChoices.push(randomChoice[i]);
 		}
-		console.log("New Choice");
-		currentChoices.push(randomChoice);
-		console.log(currentChoices);
+		console.log("In placeChoices, these are the Choices: " + currentChoices[0].choice, currentChoices[1].choice, currentChoices[2].choice);
 }
 
 function startGame(){
-	console.log("startGame");
-	console.log("calling drawMom");
+	console.log("In startGame");
 	drawMom(momAnger);
 	$.getJSON("/api/game.json", function(data){
 		phrases.push(data.levels[0].phrases);
@@ -144,7 +151,7 @@ function startGame(){
 }
 
 var Game = function(){
-	console.log("Game");
+	console.log("In Game");
 	$("#start").css("display", "none");
 	startGame();
 	// gameTime = new Date().getTime();
@@ -153,9 +160,10 @@ var Game = function(){
 
 function beginGame(){
 	$(".start").on("click", this.Game.bind(this));
-	console.log("Begin");
+	console.log("In beginGame");
 	$("#choices").on("click", function(event){
 		var playerChoice = event.target.className;
+		console.log("playerScore in beginGame: " + playerScore);
 		calcScore(playerChoice);
 	} );
 }

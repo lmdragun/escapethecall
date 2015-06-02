@@ -36,7 +36,7 @@
 		float: right;
 	}
 
-	.mom-anger {
+	#mom-anger {
 		width: 40px;
 		height: 200px;
 		border: 1px solid red;
