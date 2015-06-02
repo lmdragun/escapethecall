@@ -4,6 +4,7 @@ var momTalk = $(".mom-phrase");
 var playerStatus = $(".current-status");
 var imgPlace = $("#upper");
 var currentChoices = [];
+var currentMomPhrase = [];
 var phrases = [];
 var choices = [];
 
@@ -91,21 +92,20 @@ function checkGameStatus(){
 
 function randomMomPhrase(){
 	console.log("randomMomPhrase");
-	var para = document.createElement("p");
 	var justPhrases = [];
 	var onlyPhrases = phrases[0];
 	_.each(onlyPhrases, function(phrase){
 		var momPhrase = {
-			id: phrase.number,
-			phrase: phrase.phrase
+			points: phrase.number,
+			phrase: phrase.phrase,
+			question: phrase.question
 		};
 		justPhrases.push(momPhrase);
 	});
 	var randomPhrase = _.sample(justPhrases, 1);
-	console.log("randomPhrase: " + randomPhrase);
-	para.text = randomPhrase;
-	para.className = "momPhrase";
-	$("#bubble").append("<p class=\"" + randomPhrase[0].id + "\">" + randomPhrase[0].phrase + "</p>");
+	console.log("randomPhrase: " + randomPhrase[0]);
+	// currentMomPhrase = randomPhrase;
+	$("#bubble").append("<p class=\"" + randomPhrase[0].points + "\">" + randomPhrase[0].phrase + "</p>");
 	console.log("New Phrase");
 }
 
@@ -132,7 +132,6 @@ function placeChoices(choices){
 
 function startGame(){
 	console.log("startGame");
-
 	console.log("calling drawMom");
 	drawMom(momAnger);
 	$.getJSON("/api/game.json", function(data){
