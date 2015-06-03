@@ -38,7 +38,31 @@
 				"question": false,
 				"type": "mid",
 				"number": 5
-				}
+			},
+			{
+				"phrase": "I remember when you were three you used to love running around without shoes on, you were such a handful that your father...",
+				"question": false,
+				"type": "mid",
+				"number": 2
+			},
+			{
+				"phrase": "See, you kept getting angry at me for making you do that and now it's turned out great, hasn't it?",
+				"question": false,
+				"type": "mid",
+				"number": 4
+			},
+			{
+				"phrase": "You never come visit anymore, you can't be THAT busy.",
+				"question": false,
+				"type": "mid",
+				"number": 3
+			},
+			{
+				"phrase": "Have you heard from your father?",
+				"question": true,
+				"type": "early",
+				"number": 3
+			}
 		],
 		"choices": [
 			{
@@ -76,18 +100,41 @@
 				"answer": false,
 				"type": "early",
 				"number": 8
+			},
+			{
+				"choice": "Hey, mom, I think I'm losing you....",
+				"answer": false,
+				"type": "later",
+				"number": 6
+			},
+			{
+				"choice": "Sorry, what did you say?",
+				"answer": false,
+				"type": "always",
+				"number": 8
+			},
+			{
+				"choice": "I'm really tired, mom.",
+				"answer": false,
+				"type": "always",
+				"number": 5
 			}
 		],
 		"statuses": [
 			{
 				"status": "You just got home from work, all you want to do is eat and sleep.",
-				"follow-up": "You didn't have time to do anything else, now you'll have to wake up early!",
-				"time": 360000
+				"followup": "You didn't have time to do anything else, now you'll have to wake up early!",
+				"time": 380000
 			},
 			{
 				"status": "You need to cook dinner.",
-				"follow-up": "You tried to cook dinner while talking to your mom and burned yourself!",
+				"followup": "You tried to cook dinner while talking to your mom and burned yourself!",
 				"time": 360000
+			},
+			{
+				"status": "Uhoh, your mom called in the morning--you need to get ready for work!",
+				"followup": "You stayed on the phone too long, you're going to be late!",
+				"time": 300000
 			}
 		]
 

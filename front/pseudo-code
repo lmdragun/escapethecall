@@ -1,0 +1,27 @@
+if time < 60 minutes (equiv 5 mins IRL?)
+	game_level_status = true
+else (if time >= 60 minutes)
+	game_level_status = false
+	return repeat_level
+end
+
+if mom_anger < 100
+	game_status = true
+else
+	game_status = false
+	return game_over
+end
+
+if mom_anger < 50
+	mom_look = normal_look
+elsif mom_anger >= 50
+	mom_look = aggravated_look
+elsif mom_anger >= 70
+	mom_look = angry_look
+elsif
+	mom_look = furious_look
+end
+
+if level_finished = true?
+	game_level ++
+end
