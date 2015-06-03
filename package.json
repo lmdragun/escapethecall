@@ -4,9 +4,7 @@
   "description": "Escape the Call is a browser based choose your own adventure type game.",
   "main": "index.js",
   "scripts": {
-  "start": "node index.js"
-  },
-  "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
