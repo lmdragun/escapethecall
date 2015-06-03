@@ -84,6 +84,23 @@ GameView.prototype = {
 		console.log("Status.time: " + status[0].time + status[0].firstStatus);
 		$("#current-status").empty();
 		$("#current-status").append("<p>" + status[0].firstStatus + "</p>");
+		var timer = new Timer({
+	    tick : 1,
+	    ontick : function (sec) {
+	        console.log('interval', sec);
+	    },
+	    onstart : function() {
+	        console.log('timer started');
+	    }
+		});
+		// defining options using on
+		timer.on('end', function () {
+		    console.log('timer ended');
+		    this.start(4).off('end');
+		});
+		//start timer for 10 seconds
+		timer.start(status[0].time);
+		console.log(timer);
 	},
 	showPhrase: function(phrase){
 		$("#bubble").empty();
