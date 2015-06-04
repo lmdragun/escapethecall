@@ -1,6 +1,6 @@
 
 function Game(){
-	this.momAngerPoints = 90;
+	this.momAngerPoints = 50;
 	this.playerPoints = 0;
 	this.gameTime = 60;
 	this.currentMomPhrase = {};
@@ -18,7 +18,7 @@ Game.prototype = {
 		img.className = "mom";
 		if(this.momAngerPoints < 35){
 			momAngerStatus = {
-				src: "images/mombasic01b.png",
+				src: "images/momnormal.png",
 				alt: "Happy mom",
 				bg: "#58C1BC",
 				font: "emmasophia",
@@ -27,29 +27,29 @@ Game.prototype = {
 		}
 		else if(this.momAngerPoints < 70){
 			momAngerStatus = {
-				src: "images/mombasic01b.png",
+				src: "images/momnormal.png",
 				alt: "Annoyed mom",
 				bg: "#F8CD5B",
-				font: "the_betty_font",
-				fontSize: "20px"
+				font: "emmasophia",
+				fontSize: "12px"
 			};
 		}
 		else if(this.momAngerPoints < 90){
 			momAngerStatus = {
-				src: "images/mombasic01b.png",
+				src: "images/mompinkish.png",
 				alt: "Angry mom",
 				bg: "#F38715",
-				font: "irregularis",
-				fontSize: "20px"
+				font: "emmasophia",
+				fontSize: "12px"
 			};
 		}
 		else if(this.momAngerPoints >= 90){
 			momAngerStatus = {
-				src: "images/mombasic01b.png",
+				src: "images/momangry.png",
 				alt: "Furious mom",
 				bg: "#F00A30",
-				font: "evil_bunny",
-				fontSize: "18px"
+				font: "the_betty_font",
+				fontSize: "20px"
 			};
 			}
 		callback(momAngerStatus);
@@ -103,6 +103,11 @@ Game.prototype = {
 			// console.dir(this);
 		}.bind(this));
 	},
+	setTime: function(callback){
+		console.log("in setTime, time: " + this.playerDetails[0].time)
+		var seconds = this.playerDetails[0].time;
+		callback(seconds);
+	},
 	calcScore: function(newPlayerPoints){
 		console.log("this.currentMomPhrase.points: " + this.currentMomPhrase[0].points);
 		var calculatedScore = newPlayerPoints - this.currentMomPhrase[0].points;
@@ -123,22 +128,25 @@ Game.prototype = {
 	},
 	checkGameStatus: function(){
 		console.dir("in checkGameStatus -- gameTime: " + this.gameTime + ", momAngerPoints: " + this.momAngerPoints + ", playerPoints: " + this.playerPoints);
+		console.log("this.gameStatus above if: " + this.gameStatus);
 		if(this.gameTime > 0 && this.momAngerPoints < 100 && this.playerPoints < 100){
-			return this.gameStatus; //if game is still going, gameStatus doesn't change
-			console.log("gameStatus in checkGameStatus: " + this.gameStatus);
+			this.gameStatus = 1; //if game is still going, gameStatus doesn't change
+			console.log("gameStatus in checkGameStatus 1: " + this.gameStatus);
 		}
-		else if(this.gameTime == 5000){
-			return this.gameStatus += 1; //if player has run out of time, playerStatus is updated and game is lost
+		else if(this.gameTime == 0){
+			this.gameStatus = 2; //if player has run out of time, playerStatus is updated and game is lost
 			// secondPlayerStatus();
 		}
-		else if(this.momAngerPoints == 100){
-			return this.gameStatus += 2; //if player enrages mom, player loses game
+		else if(this.momAngerPoints >= 100){
+			this.gameStatus = 3; //if player enrages mom, player loses game
 			// lostGame();
+			console.log("gameStatus in checkGameStatus 3: " + this.gameStatus);
 		}
-		else if(this.playerPoints == 100){
-			return this.gameStatus += 3; //if player makes enough points before the last two options, player wins
+		else if(this.playerPoints >= 100){
+			this.gameStatus = 4; //if player makes enough points before the last two options, player wins
 			// wonLevel();
 		}
 		console.log("this.gameStatus: " + this.gameStatus);
+		return this.gameStatus
 	}
 }
