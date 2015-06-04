@@ -2,8 +2,9 @@
 function Game(){
 	this.momAngerPoints = 0;
 	this.playerPoints = 0;
+	this.gameTime = 60;
 	this.currentMomPhrase = {};
-	this.playerStatus = {};
+	this.playerDetails = {};
 	this.gameStatus = 1;
 	this.phrases = [];
 	this.choices = [];
@@ -70,25 +71,21 @@ Game.prototype = {
 		callback(randomChoices);
 		});
 	},
-	getStatus: function(callback){
-		console.log("in getStatus");
-		var neaterStatuses = [];
-
+	getDetails: function(callback){
+		var neaterDetails = [];
 		return $.getJSON("/api/game.json", function(data){
-			var statuses = [];
-			statuses.push(data.levels[0].statuses);
-			_.each(statuses[0], function(status){
-				neaterStatuses.push({
-					firstStatus: status.status,
-					secondStatus: status.followup,
-					time: status.time
+			var details = [];
+			details.push(data.levels[0].details);
+			_.each(details[0], function(detail){
+				neaterDetails.push({
+					detail: detail.detail,
+					followup: detail.followup,
+					time: detail.time
 				});
 			});
-			this.playerStatus = _.sample(neaterStatuses, 1);
-			console.log(this.playerStatus);
-			callback(this.playerStatus);
+			this.playerDetails = _.sample(neaterDetails, 1);
+			callback(this.playerDetails);
 		}.bind(this));
-
 	},
 	getPhrases: function(){
 		var neaterPhrases = []; //collection of phrases separated into objects
@@ -121,25 +118,28 @@ Game.prototype = {
 			playerPoints: this.playerPoints
 		}
 		console.log("calcScore, momAngerPoints: " + this.momAngerPoints + ", playerPoints: " + this.playerPoints);
-		return points
+		return points;
 		// drawPoints(playerPoints, momAngerPoints)
 	},
 	checkGameStatus: function(){
-		console.log("In checkGameStatus");
-		if(this.gameTime < 5000 && this.momAngerPoints < 100 && this.playerPoints < 100){
-			return gameStatus; //if game is still going, gameStatus doesn't change
+		console.dir(this);
+		console.dir("in checkGameStatus -- gameTime: " + this.gameTime + ", momAngerPoints: " + this.momAngerPoints + ", playerPoints: " + this.playerPoints);
+		if(this.gameTime > 0 && this.momAngerPoints < 100 && this.playerPoints < 100){
+			return this.gameStatus; //if game is still going, gameStatus doesn't change
+			console.log("gameStatus in checkGameStatus: " + this.gameStatus);
 		}
 		else if(this.gameTime == 5000){
-			return gameStatus += 1; //if player has run out of time, playerStatus is updated and game is lost
+			return this.gameStatus += 1; //if player has run out of time, playerStatus is updated and game is lost
 			// secondPlayerStatus();
 		}
 		else if(this.momAngerPoints == 100){
-			return gameStatus += 2; //if player enrages mom, player loses game
+			return this.gameStatus += 2; //if player enrages mom, player loses game
 			// lostGame();
 		}
 		else if(this.playerPoints == 100){
-			return gameStatus += 3; //if player makes enough points before the last two options, player wins
+			return this.gameStatus += 3; //if player makes enough points before the last two options, player wins
 			// wonLevel();
 		}
+		console.log("this.gameStatus: " + this.gameStatus);
 	}
 }

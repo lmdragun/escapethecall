@@ -10,8 +10,7 @@ function GameView(model){
 
 	$(".start").on("click", function(){
 		$("#start").css("display", "none");
-		this.model.getStatus(this.showStatus);
-		console.dir(this.showStatus);
+		this.model.getDetails(this.showDetails);
 		this.gameLoop();
 	}.bind(this));
 	$("#choices").on("click", function(event){
@@ -27,29 +26,36 @@ function GameView(model){
 
 GameView.prototype = {
 	gameLoop: function(){
-		this.model.checkGameStatus();
-				this.model.getMomAngerStatus(this.drawMom);
-				this.model.getChoices(this.showChoices);
-				this.model.getPhrases().done(function(){
-					this.showPhrase(this.model.currentMomPhrase);
-				}.bind(this));
+		// this.model.checkGameStatus();
+		// 		this.model.getMomAngerStatus(this.drawMom);
+		// 		this.model.getChoices(this.showChoices);
+		// 		this.model.getPhrases().done(function(){
+		// 			this.showPhrase(this.model.currentMomPhrase);
+		// 		}.bind(this));
+			var gameStatus = this.model.checkGameStatus();
+				console.dir("gamestatus in gameloop: " + gameStatus);
 
-				// console.log(gameStatus);
-				// switch(gameStatus){
-				// 	case 1:
-				// 		this.model.getMomAngerStatus(this.drawMom);
-				// 		this.model.getChoices(this.showChoices);
-				// 		this.model.getPhrases().done(function(){
-				// 			this.showPhrase(this.model.currentMomPhrase);
-				// 		}.bind(this));
-				// 		break;
-				// 	case 2:
-				// 		break;
-				// 	case 3:
-				// 		break;
-				// 	case 4:
-				// 		break;
-				// }
+			// this.model.getMomAngerStatus(this.drawMom);
+			// this.model.getChoices(this.showChoices);
+			// this.model.getPhrases().done(function(){
+			// 	this.showPhrase(this.model.currentMomPhrase);
+			// }.bind(this));
+
+				switch(gameStatus){
+					case 1:
+						this.model.getMomAngerStatus(this.drawMom);
+						this.model.getChoices(this.showChoices);
+						this.model.getPhrases().done(function(){
+							this.showPhrase(this.model.currentMomPhrase);
+						}.bind(this));
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					case 4:
+						break;
+				}
 
 	},
 	drawMom: function(momAngerStatus){
@@ -79,28 +85,27 @@ GameView.prototype = {
 			$("#choices").append("<h1 class=\"" + choices[i].id + "\">" + choices[i].choice + "</h1>");
 		}
 	},
-	showStatus: function(status){
-		console.dir("in showStatus");
-		console.log("Status.time: " + status[0].time + status[0].firstStatus);
+	showDetails: function(details){
+		console.log("in showDetails");
 		$("#current-status").empty();
-		$("#current-status").append("<p>" + status[0].firstStatus + "</p>");
-		var timer = new Timer({
-	    tick : 1,
-	    ontick : function (sec) {
-	        console.log('interval', sec);
-	    },
-	    onstart : function() {
-	        console.log('timer started');
-	    }
-		});
-		// defining options using on
-		timer.on('end', function () {
-		    console.log('timer ended');
-		    this.start(4).off('end');
-		});
-		//start timer for 10 seconds
-		timer.start(status[0].time);
-		console.log(timer);
+		$("#current-status").append("<p>" + details[0].detail + "</p>");
+		// var timer = new Timer({
+	  //   tick : 1,
+	  //   ontick : function (sec) {
+	  //       console.log('interval', sec);
+	  //   },
+	  //   onstart : function() {
+	  //       console.log('timer started');
+	  //   }
+		// });
+		// // defining options using on
+		// timer.on('end', function () {
+		//     console.log('timer ended');
+		//     this.start(4).off('end');
+		// });
+		// //start timer for 10 seconds
+		// timer.start(status[0].time);
+		// console.log(timer);
 	},
 	showPhrase: function(phrase){
 		$("#bubble").empty();

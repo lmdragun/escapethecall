@@ -120,19 +120,19 @@
 				"number": 5
 			}
 		],
-		"statuses": [
+		"details": [
 			{
-				"status": "You just got home from work, all you want to do is eat and sleep.",
+				"detail": "You just got home from work, all you want to do is eat and sleep.",
 				"followup": "You didn't have time to do anything else, now you'll have to wake up early!",
 				"time": 380000
 			},
 			{
-				"status": "You need to cook dinner.",
+				"detail": "You need to cook dinner.",
 				"followup": "You tried to cook dinner while talking to your mom and burned yourself!",
 				"time": 360000
 			},
 			{
-				"status": "Uhoh, your mom called in the morning--you need to get ready for work!",
+				"detail": "Uhoh, your mom called in the morning--you need to get ready for work!",
 				"followup": "You stayed on the phone too long, you're going to be late!",
 				"time": 300000
 			}
