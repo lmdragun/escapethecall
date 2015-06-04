@@ -64,7 +64,8 @@ Game.prototype = {
 			_.each(choices[0], function(choice){
 				neaterChoices.push({
 					id: choice.number,
-					choice: choice.choice
+					choice: choice.choice,
+					attempt: choice.attempt
 				});
 			});
 		randomChoices = _.sample(neaterChoices, 3);
@@ -104,7 +105,7 @@ Game.prototype = {
 		}.bind(this));
 	},
 	setTime: function(callback){
-		console.log("in setTime, time: " + this.playerDetails[0].time)
+		console.log("in setTime, time: " + this.playerDetails[0].time);
 		var seconds = this.playerDetails[0].time;
 		callback(seconds);
 	},
@@ -121,7 +122,7 @@ Game.prototype = {
 		var points = {
 			momAngerPoints: this.momAngerPoints,
 			playerPoints: this.playerPoints
-		}
+		};
 		console.log("calcScore, momAngerPoints: " + this.momAngerPoints + ", playerPoints: " + this.playerPoints);
 		return points;
 		// drawPoints(playerPoints, momAngerPoints)
@@ -133,7 +134,7 @@ Game.prototype = {
 			this.gameStatus = 1; //if game is still going, gameStatus doesn't change
 			console.log("gameStatus in checkGameStatus 1: " + this.gameStatus);
 		}
-		else if(this.gameTime == 0){
+		else if(this.gameTime === 0){
 			this.gameStatus = 2; //if player has run out of time, playerStatus is updated and game is lost
 			// secondPlayerStatus();
 		}
@@ -147,6 +148,6 @@ Game.prototype = {
 			// wonLevel();
 		}
 		console.log("this.gameStatus: " + this.gameStatus);
-		return this.gameStatus
+		return this.gameStatus;
 	}
-}
+};

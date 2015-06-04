@@ -98,90 +98,105 @@
 			{
 				"choice": "Uhuh.",
 				"answer": true,
+				"attempt": false,
 				"type": "always",
 				"number": 2
 			},
 			{
 				"choice": "Right.",
 				"answer": false,
+				"attempt": false,
 				"type": "always",
 				"number": 3
 			},
 			{
 				"choice": "Yep.",
 				"answer": true,
+				"attempt": false,
 				"type": "always",
 				"number": 3
 			},
 			{
 				"choice": "I love you, mom.",
 				"answer": false,
+				"attempt": false,
 				"type": "always",
 				"number": 10
 			},
 			{
 				"choice": "Nope.",
 				"answer": true,
+				"attempt": false,
 				"type": "always",
 				"number": 3
 			},
 			{
 				"choice": "How was your day?",
 				"answer": false,
+				"attempt": false,
 				"type": "early",
 				"number": 8
 			},
 			{
 				"choice": "Hey, mom, I think I'm losing you....",
 				"answer": false,
+				"attempt": true,
 				"type": "later",
 				"number": 6
 			},
 			{
 				"choice": "Sorry, what did you say?",
 				"answer": false,
+				"attempt": false,
 				"type": "always",
 				"number": 8
 			},
 			{
 				"choice": "I'm really tired, mom.",
 				"answer": false,
+				"attempt": true,
 				"type": "always",
 				"number": 5
 			},
 			{
 				"choice": "*mumble*",
 				"answer": false,
+				"attempt": false,
 				"type": "always",
 				"number": 1
 			},
 			{
 				"choice": "Uhhh",
 				"answer": false,
+				"attempt": false,
 				"type": "always",
 				"number": 1
 			},
 			{
 				"choice": "I've, uh, gotta go--",
 				"answer": false,
+				"attempt": true,
 				"type": "always",
 				"number": 2
 			},
 			{
 				"choice": "Maybe I should come visit soon.",
 				"answer": false,
+				"attempt": false,
 				"type": "always",
 				"number": 9
 			},
 			{
 				"choice": "I thought you were busy today.",
 				"answer": false,
+				"attempt": false,
 				"type": "always",
 				"number": 3
 			},
 			{
 				"choice": "My day was super boring.",
 				"answer": false,
+				"attempt": false,
 				"type": "always",
 				"number": 4
 			},
@@ -204,27 +219,27 @@
 			{
 				"detail": "You just got home from work, all you want to do is eat and sleep.",
 				"followup": "You didn't have time to do anything else, now you'll have to wake up early!",
-				"time": 160
+				"time": 100
 			},
 			{
 				"detail": "You need to cook dinner.",
 				"followup": "You tried to cook dinner while talking to your mom and burned yourself!",
-				"time": 150
+				"time": 100
 			},
 			{
 				"detail": "Uhoh, your mom called in the morning--you need to get ready for work!",
 				"followup": "You stayed on the phone too long, you're going to be late!",
-				"time": 130
+				"time": 90
 			},
 			{
 				"detail": "You're supposed to go out with your friends soon and you're still in your pajamas!",
 				"followup": "Looks like you'll be going out in sleepwear chic.",
-				"time": 100
+				"time": 70
 			},
 			{
 			"detail": "You're about to go into the movie theater.",
 			"followup": "You missed the movie! You can't another showing for a week!",
-			"time": 100
+			"time": 70
 		}
 		]
 
