@@ -298,15 +298,30 @@
 		height: auto;
 	}
 
-	footer {
-		width: 100%;
-	}
-	footer img {
-		margin-right: 30%;
-		height: 150px;
-		float: left;
-	}
-	#counter img {
-		float: right;
-		margin-top: 10%;
-	}
+/*   Bottom of the page */
+
+ .banner {
+  width: 100%;
+}
+.banner img {
+  height: 150px;
+  float: left;
+}
+/* .construction {
+  width: 100%;
+}
+  .construction img {
+    width: 100%;
+  }
+#counter img {
+
+  margin-top: 10%;
+} */
+
+  footer {
+    width: 100%;
+    color: #FFF;
+    text-align: center;
+    margin-top: 100px;
+
+  }
