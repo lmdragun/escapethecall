@@ -2,13 +2,12 @@
   "name": "escapethecall",
   "version": "1.0.0",
   "description": "Escape the Call is a browser based choose your own adventure type game.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "engines": {
     "node": "0.12.x"
-  },
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
