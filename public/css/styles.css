@@ -307,16 +307,18 @@
   height: 150px;
   float: left;
 }
-/* .construction {
+.construction {
   width: 100%;
+  padding: 10px;
 }
   .construction img {
     width: 100%;
+
   }
 #counter img {
 
   margin-top: 10%;
-} */
+}
 
   footer {
     width: 100%;
