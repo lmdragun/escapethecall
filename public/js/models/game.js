@@ -1,6 +1,6 @@
 
 function Game(){
-	this.momAngerPoints = 0;
+	this.momAngerPoints = 90;
 	this.playerPoints = 0;
 	this.gameTime = 60;
 	this.currentMomPhrase = {};
@@ -122,7 +122,6 @@ Game.prototype = {
 		// drawPoints(playerPoints, momAngerPoints)
 	},
 	checkGameStatus: function(){
-		console.dir(this);
 		console.dir("in checkGameStatus -- gameTime: " + this.gameTime + ", momAngerPoints: " + this.momAngerPoints + ", playerPoints: " + this.playerPoints);
 		if(this.gameTime > 0 && this.momAngerPoints < 100 && this.playerPoints < 100){
 			return this.gameStatus; //if game is still going, gameStatus doesn't change

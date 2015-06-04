@@ -42,18 +42,20 @@ GameView.prototype = {
 			// }.bind(this));
 
 				switch(gameStatus){
-					case 1:
+					case 1: // means keep playing
 						this.model.getMomAngerStatus(this.drawMom);
 						this.model.getChoices(this.showChoices);
 						this.model.getPhrases().done(function(){
 							this.showPhrase(this.model.currentMomPhrase);
 						}.bind(this));
 						break;
-					case 2:
+					case 2: // means the player is out of time
 						break;
-					case 3:
+					case 3: // means the mom is too angry
+					console.log("in case 3");
+						furiousMom();
 						break;
-					case 4:
+					case 4: // means the player won
 						break;
 				}
 
@@ -110,6 +112,23 @@ GameView.prototype = {
 	showPhrase: function(phrase){
 		$("#bubble").empty();
 		$("#bubble").append("<p class=\"" + phrase[0].points + "\">" + phrase[0].phrase + "</p>");
+	},
+	furiousMom: function(){
+		$("#start").empty();
+		$("start").append("<img src=\"/images/phonehandle.png\" id=\"phone-handle\">");
+		$("#start").css("display", "inline").append("<h1>Uhoh, mom's angry now!</h1>");
+		var phone = $("#phone-handle");
+		var distance = 0;
+		  setInterval(function() {
+		    phone.style.webkitTransform = 'rotate('+-distance*2+'deg)';
+		    phone.style.left = distance + 'px';
+		    phone.style.top = (-(distance - window.innerHeight + 100)  + 'px');
+		    if (distance == window.innerWidth) {
+		      distance = 0;
+		    } else {
+		      distance += 2;
+		    }
+		  }, 45);
 	},
 	gameOver: function(){
 		$("#start").empty();
