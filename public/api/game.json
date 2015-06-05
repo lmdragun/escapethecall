@@ -92,6 +92,18 @@
 				"question": true,
 				"type": "late",
 				"number": 7
+			},
+			{
+				"phrase": "I can't believe she had the nerve to ask me to help out again this year, after I did so much for them and I didn't even get a thank you.",
+				"question": false,
+				"type": "late",
+				"number": 4
+			},
+			{
+				"phrase": "The party was so tacky, if it was mine I'd be so ashamed.",
+				"question": false,
+				"type": "mid",
+				"number": 1
 			}
 		],
 		"choices": [
@@ -240,7 +252,12 @@
 			"detail": "You're about to go into the movie theater.",
 			"followup": "You missed the movie! You can't another showing for a week!",
 			"time": 70
-		}
+			},
+			{
+			"detail": "Date night! But your mom is interrupting.",
+			"followup": "Your date is not happy about this unplanned third wheel, you can kiss another date goodbye.",
+			"time": 70
+			}
 		]
 
 		}

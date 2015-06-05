@@ -25,6 +25,12 @@ function GameView(model){
 	$("#hangup").on("click", function(event){
 		this.gameOver();
 	}.bind(this));
+	$(".restart").on("click", function(){
+		$("#start").empty();
+		$("#start").css("display", "none");
+		this.model.getDetails(this.showDetails.bind(this));
+		this.gameLoop();
+	}.bind(this));
 }
 
 GameView.prototype = {
@@ -69,10 +75,9 @@ GameView.prototype = {
 		$("#mom-anger").empty();
 		console.log("playerPoints: " + calcScore.playerPoints);
 		console.log("momAngerPoints: " + calcScore.momAngerPoints);
-		for(var i = 0; i < calcScore.momAngerPoints; i++){
-			$("#mom-anger").append("<div>" + "" + "</div>");
-			console.log("mom points");
-		}
+		$("#mom-anger").append("<div class=\"anger-points\"></div>");
+		var height = 200 - calcScore.momAngerPoints + "px";
+		$(".anger-points").css("height", height);
 	},
 	showChoices: function(choices){
 		$("#choices").empty();
@@ -82,8 +87,8 @@ GameView.prototype = {
 	},
 	showDetails: function(details){
 		console.log("in showDetails");
-		$("#current-status").empty();
-		$("#current-status").append("<p>" + details[0].detail + "</p>");
+		$("#current-detail").empty();
+		$("#current-detail").append("<p>" + details[0].detail + "</p>");
 		this.detailsFollowUp = details[0].followup;
 		var time = details[0].time;
 		console.log(this);
@@ -106,10 +111,12 @@ GameView.prototype = {
 		$("#bubble").append("<p class=\"" + phrase[0].points + "\">" + phrase[0].phrase + "</p>");
 	},
 	outOfTime: function(){
+		clearInterval(timerSeconds);
 		$("#start").empty();
 		$("#start").css("display", "inline").append("<br><br><h1>You Lose!</h1><h2>" + this.detailsFollowUp + "</h2>");
 	},
 	furiousMom: function(){
+		clearInterval(timerSeconds);
 		$("#start").css("display", "inline").append("<h1>Uhoh, mom's angry now!</h1><h2>I hope you remember her favorite flowers!</h2>").append("<div id=\"phone-handle\"><img src=\"/images/phonehandle.png\"></div>");
 		var phone = document.getElementById("phone-handle");
 		console.log(phone);
@@ -136,8 +143,9 @@ GameView.prototype = {
 		$("#status").css("background", "url('/images/confetti01.gif')");
 	},
 	gameOver: function(){
-		$("#start").css("display", "inline").append("<h1>GAME OVER</h1>");
-		$("#start").append("<p>Play again?</p>").append("<button class=\"start\">Start the Game</button>");
+		clearInterval(timerSeconds);
+		$("#start").css("display", "block").append("<h1>GAME OVER</h1>");
+		$("#start").append("<p>Play again?</p>").append("<button class=\"restart\">Start the Game</button>");
 		//attempting a barrel roll and then just simple spinning, not really working the way I want it to
 		var distance = 20;
 		// for(i = 0; i<=360; i++){
