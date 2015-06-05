@@ -73,6 +73,8 @@ Game.prototype = {
 		});
 	},
 	getDetails: function(callback){
+		this.playerPoints = 0;
+		this.momAngerPoints = 0;
 		var neaterDetails = [];
 		return $.getJSON("/api/game.json", function(data){
 			var details = [];

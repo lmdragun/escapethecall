@@ -138,6 +138,11 @@ GameView.prototype = {
 	},
 	gameOver: function(){
 		clearInterval(timerSeconds);
+		$("#bubble").empty();
+		$("#choices").empty();
+		$("#current-status").empty();
+		$("#point-count").empty();
+		$("#timer").empty();
 		$("#start").css("display", "block").append("<h1>GAME OVER</h1>");
 		$("#start").append("<p>Play again?</p>").append("<button class=\"restart\">Start the Game</button>");
 		$(".restart").on("click", function(){
