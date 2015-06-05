@@ -25,12 +25,6 @@ function GameView(model){
 	$("#hangup").on("click", function(event){
 		this.gameOver();
 	}.bind(this));
-	$(".restart").on("click", function(){
-		$("#start").empty();
-		$("#start").css("display", "none");
-		this.model.getDetails(this.showDetails.bind(this));
-		this.gameLoop();
-	}.bind(this));
 }
 
 GameView.prototype = {
@@ -76,7 +70,7 @@ GameView.prototype = {
 		console.log("playerPoints: " + calcScore.playerPoints);
 		console.log("momAngerPoints: " + calcScore.momAngerPoints);
 		$("#mom-anger").append("<div class=\"anger-points\"></div>");
-		var height = 200 - calcScore.momAngerPoints + "px";
+		var height = 200 - (calcScore.momAngerPoints * 2 ) + "px";
 		$(".anger-points").css("height", height);
 	},
 	showChoices: function(choices){
@@ -146,6 +140,12 @@ GameView.prototype = {
 		clearInterval(timerSeconds);
 		$("#start").css("display", "block").append("<h1>GAME OVER</h1>");
 		$("#start").append("<p>Play again?</p>").append("<button class=\"restart\">Start the Game</button>");
+		$(".restart").on("click", function(){
+			$("#start").empty();
+			$("#start").css("display", "none");
+			this.model.getDetails(this.showDetails.bind(this));
+			this.gameLoop();
+		}.bind(this));
 		//attempting a barrel roll and then just simple spinning, not really working the way I want it to
 		var distance = 20;
 		// for(i = 0; i<=360; i++){
