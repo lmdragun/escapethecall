@@ -1,7 +1,7 @@
 
 function Game(){
 	this.momAngerPoints = 0;
-	this.playerPoints = 0;
+	this.playerPoints = 99;
 	this.gameTime = 60;
 	this.currentMomPhrase = {};
 	this.playerDetails = {};

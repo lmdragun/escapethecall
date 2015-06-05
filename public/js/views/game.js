@@ -111,9 +111,20 @@ GameView.prototype = {
 	},
 	furiousMom: function(){
 		clearInterval(timerSeconds);
+		$("#bubble").empty();
+		$("#choices").empty();
+		$("#current-status").empty();
+		$("#point-count").empty();
+		$("#timer").empty();
 		$("#start").css("display", "inline").append("<h1>Uhoh, mom's angry now!</h1><h2>I hope you remember her favorite flowers!</h2>").append("<div id=\"phone-handle\"><img src=\"/images/phonehandle.png\"></div>");
 		var phone = document.getElementById("phone-handle");
-		console.log(phone);
+		$("#start").append("<p>Play again?</p>").append("<button class=\"restart\">Play Again?</button>");
+		$(".restart").on("click", function(){
+			$("#start").empty();
+			$("#start").css("display", "none");
+			this.model.getDetails(this.showDetails.bind(this));
+			this.gameLoop();
+		}.bind(this));
 		var distance = 20;
 		  setInterval(function() {
 		    phone.style.webkitTransform = 'rotate('+-distance*2+'deg)';
@@ -129,7 +140,7 @@ GameView.prototype = {
 	win: function(){
 		clearInterval(timerSeconds);
 		$("#bubble").empty();
-		$("#choices").empty();
+		// $("#choices").empty();
 		$("#current-status").empty();
 		$("#bubble").css("font-family", "emmasophia").css("font-size", "16 px");
 		$("#bubble").append("<p>Oh, look at the time! I should let you go. I love you, honey.</p>");
@@ -139,15 +150,20 @@ GameView.prototype = {
 	gameOver: function(){
 		clearInterval(timerSeconds);
 		$("#bubble").empty();
-		$("#choices").empty();
+		// $("#choices").empty();
 		$("#current-status").empty();
 		$("#point-count").empty();
 		$("#timer").empty();
 		$("#start").css("display", "block").append("<h1>GAME OVER</h1>");
-		$("#start").append("<p>Play again?</p>").append("<button class=\"restart\">Start the Game</button>");
+		$("#start").append("<p>Play again?</p>").append("<button class=\"restart\">Play Again?</button>");
 		$(".restart").on("click", function(){
 			$("#start").empty();
 			$("#start").css("display", "none");
+			//trying to clear out the gif from the win
+			$("#status").css("background", "url('/images/blackbg.png')");
+			$("#status").css("background-color", "#000");
+			$("#mom-anger").append("<div class=\"anger-points\"></div>");
+			$(".anger-points").css("height", "200px");
 			this.model.getDetails(this.showDetails.bind(this));
 			this.gameLoop();
 		}.bind(this));
