@@ -18,7 +18,7 @@ Game.prototype = {
 		img.className = "mom";
 		if(this.momAngerPoints < 35){
 			momAngerStatus = {
-				src: "images/momnormal.png",
+				src: "images/mom01.png",
 				alt: "Happy mom",
 				bg: "#58C1BC",
 				font: "emmasophia",
@@ -27,7 +27,7 @@ Game.prototype = {
 		}
 		else if(this.momAngerPoints < 70){
 			momAngerStatus = {
-				src: "images/momnormal.png",
+				src: "images/mom02.png",
 				alt: "Annoyed mom",
 				bg: "#F8CD5B",
 				font: "emmasophia",
@@ -36,7 +36,7 @@ Game.prototype = {
 		}
 		else if(this.momAngerPoints < 90){
 			momAngerStatus = {
-				src: "images/mompinkish.png",
+				src: "images/mom03.png",
 				alt: "Angry mom",
 				bg: "#F38715",
 				font: "emmasophia",
@@ -45,7 +45,7 @@ Game.prototype = {
 		}
 		else if(this.momAngerPoints >= 90){
 			momAngerStatus = {
-				src: "images/momangry.png",
+				src: "images/mom04.png",
 				alt: "Furious mom",
 				bg: "#F00A30",
 				font: "the_betty_font",
